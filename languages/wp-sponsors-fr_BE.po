@@ -35,7 +35,7 @@ msgid "Sponsors"
 msgstr "Sponsors"
 
 #: includes/class-wp-sponsors-widget.php:8
-msgid "List your sponsors, per category, with or without images"
+msgid "List your sponsors, per level, with or without images"
 msgstr ""
 "Affichez une liste de vos sponsors, par catégorie, avec ou sans image"
 
@@ -111,35 +111,35 @@ msgid "Category"
 msgstr "Catégorie"
 
 #: includes/class-wp-sponsors.php:209
-msgid "Search categories"
+msgid "Search levels"
 msgstr "Cherchez les catégories"
 
 #: includes/class-wp-sponsors.php:210
-msgid "All categories"
+msgid "All levels"
 msgstr "Toutes les catégories"
 
 #: includes/class-wp-sponsors.php:211
-msgid "Parent category"
+msgid "Parent level"
 msgstr "Parent"
 
 #: includes/class-wp-sponsors.php:212
-msgid "Parent category:"
+msgid "Parent level:"
 msgstr "Parent:"
 
 #: includes/class-wp-sponsors.php:213
-msgid "Edit category"
+msgid "Edit level"
 msgstr "Editer la catégorie"
 
 #: includes/class-wp-sponsors.php:214
-msgid "Update category"
+msgid "Update level"
 msgstr "Sauvegarder la catégorie"
 
 #: includes/class-wp-sponsors.php:215
-msgid "Add New category"
+msgid "Add New level"
 msgstr "Ajouter une nouvelle catégorie"
 
 #: includes/class-wp-sponsors.php:216
-msgid "New category"
+msgid "New level"
 msgstr "Nouvelle catégorie"
 
 #: includes/class-wp-sponsors.php:217

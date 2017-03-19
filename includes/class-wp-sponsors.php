@@ -198,25 +198,25 @@ class Wp_Sponsors {
                 add_action( 'init', 'create_sponsor_taxonomies', 0 );
 
                 /**
-                 * Creates a categories taxonomy for the sponsors post type
+                 * Creates a levels taxonomy for the sponsors post type
                  */
                 function create_sponsor_taxonomies()
                 {
-                        // Labels for the sponsor categories
+                        // Labels for the sponsor levels
                         $labels = array(
-                                'name' => _x('Categories', 'taxonomy general name'),
-                                'singular_name' => _x('Category', 'taxonomy singular name'),
-                                'search_items' => __('Search categories'),
-                                'all_items' => __('All categories'),
-                                'parent_item' => __('Parent category'),
-                                'parent_item_colon' => __('Parent category:'),
-                                'edit_item' => __('Edit category'),
-                                'update_item' => __('Update category'),
-                                'add_new_item' => __('Add New category'),
-                                'new_item_name' => __('New category'),
-                                'menu_name' => __('Categories'),
+                                'name' => _x('Sponsor Levels', 'taxonomy general name'),
+                                'singular_name' => _x('Level', 'taxonomy singular name'),
+                                'search_items' => __('Search Levels'),
+                                'all_items' => __('All Levels'),
+                                'parent_item' => __('Parent Level'),
+                                'parent_item_colon' => __('Parent Level:'),
+                                'edit_item' => __('Edit Level'),
+                                'update_item' => __('Update Level'),
+                                'add_new_item' => __('Add New Level'),
+                                'new_item_name' => __('New Level'),
+                                'menu_name' => __('Sponsor Levels'),
                         );
-                        // Arguments for the sponsor categories (public = false means it don't have a url)
+                        // Arguments for the sponsor levels (public = false means it don't have a url)
                         $args = array(
                                 'hierarchical'      => true,
                                 'public'            => false,
@@ -227,7 +227,7 @@ class Wp_Sponsors {
                                 'query_var'         => true
                         );
                         // Register the sponsors taxonomy
-                        register_taxonomy( 'sponsor_categories', array( 'sponsor' ), $args );
+                        register_taxonomy( 'sponsor_levels', array( 'sponsor' ), $args );
                 }
 
                 /**
@@ -254,7 +254,7 @@ class Wp_Sponsors {
                                 'query_var'             => false,
                                 'capability_type'       => 'post',
                                 'supports'              => array( 'title', 'page-attributes' ),
-                                'taxonomies'            => array( 'sponsor_categories'),
+                                'taxonomies'            => array( 'sponsor_levels'),
                                 'register_meta_box_cb'  => 'add_sponsor_metabox'
                         );
                         register_post_type( 'sponsor', $args );
@@ -347,7 +347,7 @@ class Wp_Sponsors {
                  * Adds a new column to the Sponsors overview list in the dashboard
                  */
                 function sponsors_add_new_column($defaults) {
-                        $defaults['wp_sponsors_logo'] = __('Sponsor logo', 'wp-sponsors');
+                        $defaults['wp_sponsors_logo'] = __('Sponsor Logo (Color)', 'wp-sponsors');
                         $defaults['menu_order'] = __('Order', 'wp-sponsors');
                         return $defaults;
                 }
@@ -359,7 +359,7 @@ class Wp_Sponsors {
                 function sponsors_column_add_image($column_name, $post_ID) {
                         $shame = new Wp_Sponsors_Shame();
                         if ($column_name == 'wp_sponsors_logo') {
-                                $image = $shame->getImage($post_ID);
+                                $image = $shame->getImage($post_ID, 'color');
                                 echo $image;
                         }
                 }

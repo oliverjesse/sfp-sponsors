@@ -5,14 +5,14 @@
     class sponsors_widget extends WP_Widget {
 
         function __construct() {
-            parent::__construct(false, $name = __( 'Sponsors', 'wp-sponsors' ), array( 'description' => __('List your sponsors, per category, with or without images', 'wp-sponsors')));
+            parent::__construct(false, $name = __( 'Sponsors', 'wp-sponsors' ), array( 'description' => __('List your sponsors, per level, with or without images', 'wp-sponsors')));
         }
 
         function widget($args, $instance) {
             extract( $args );
             // WP_Query arguments
-            if($instance['category'] != 'all' && $instance['category'] != '') {
-                $term = $instance['category'];
+            if($instance['level'] != 'all' && $instance['level'] != '') {
+                $term = $instance['level'];
             }
 
             $args = array (
@@ -24,10 +24,10 @@
                 'orderby'                => $instance['order_by']
             );
 
-            if($instance['category'] != 'all' && $instance['category'] != '') {
+            if($instance['level'] != 'all' && $instance['level'] != '') {
                 $args['tax_query'] = array(
                     array(
-                        'taxonomy' => 'sponsor_categories',
+                        'taxonomy' => 'sponsor_levels',
                         'field'    => 'slug',
                         'terms'    => $term,
                     )
@@ -68,7 +68,7 @@
                             <div class="sponsor-title widget-title"><?php echo the_title(); ?></div>
                         <?php }; ?>
                         <?php if($instance['check_images'] === "on"){ ?>
-                            <?php echo $shame->getImage(get_the_ID()) ?>
+                            <?php echo $shame->getImage(get_the_ID(), $instance['image_type']) ?>
                         <?php } else { the_title(); } ?>
                         <?php if($instance['show_description'] === "on"){ ?>
                             <br><p class="sponsor-desc"><?php echo get_post_meta( get_the_ID(), 'wp_sponsors_desc', true ); ?></p>
@@ -89,9 +89,10 @@
             $instance['show_description'] = $new_instance['show_description'];
             $instance['show_title'] = $new_instance['show_title'];
             $instance['check_images'] = $new_instance['check_images'];
+            $instance['image_type'] = $new_instance['image_type'];
             $instance['target_blank'] = $new_instance['target_blank'];
             $instance['order_by'] = $new_instance['order_by'];
-            $instance['category'] = $new_instance['category'];
+            $instance['level'] = $new_instance['level'];
             $instance['display_option'] = $new_instance['display_option'];
             $instance['title'] = strip_tags( $new_instance['title'] );
             $instance['max'] = $new_instance['max'];
@@ -102,29 +103,37 @@
         function form($instance) {
 
             //Set up some default widget settings.
-            $defaults = array( 'title' => __('Our sponsors', 'wp-sponsors'), 'check_images' => 'on' , 'category' => 'all', 'display_option' => 'vertical', 'order_by' => 'menu_order', 'target_blank' => 'on', max => '');
+            $defaults = array( 'title' => __('Our sponsors', 'wp-sponsors'), 'image_type' => 'white', 'check_images' => 'on' , 'level' => 'all', 'display_option' => 'vertical', 'order_by' => 'menu_order', 'target_blank' => 'on', max => '');
             $instance = wp_parse_args( (array) $instance, $defaults );
 
             if(empty($instance)) {
                 $key = array('check_images');
                 $instance = array_fill_keys($key, 'on');
             }
-            $cats = get_terms( 'sponsor_categories' ); ?>
+            $cats = get_terms( 'sponsor_levels' ); ?>
             <p>
                 <label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e('Title', 'wp-sponsors'); ?></label>
                 <input id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $instance['title']; ?>" style="width:100%;" />
             </p>
             <?php if ( ! empty( $cats ) && ! is_wp_error( $cats ) ){ ?>
             <p>
-                <label for="<?php echo $this->get_field_id('category'); ?>"> <?php echo __('Category', 'wp-sponsors')?></label>
-                <select id="<?php echo $this->get_field_id('category'); ?>" name="<?php echo $this->get_field_name('category'); ?>" class="widefat" style="width:100%;">
+                <label for="<?php echo $this->get_field_id('level'); ?>"> <?php echo __('Level', 'wp-sponsors')?></label>
+                <select id="<?php echo $this->get_field_id('level'); ?>" name="<?php echo $this->get_field_name('level'); ?>" class="widefat" style="width:100%;">
                     <option value="all"><?php echo _e('All', 'wp-sponsors'); ?></option>
                     <?php foreach ( $cats as $cat ) { ?>
-                        <option <?php selected( $instance['category'],$cat->slug,  'selected'); ?> value="<?php echo $cat->slug; ?>"><?php echo $cat->name; ?></option>
+                        <option <?php selected( $instance['level'],$cat->slug,  'selected'); ?> value="<?php echo $cat->slug; ?>"><?php echo $cat->name; ?></option>
                     <?php } ?>
                 </select>
             </p>
             <?php } ?>
+            <p>
+                <label for="<?php echo $this->get_field_id('image_type'); ?>"> <?php echo __('Image Type', 'wp-sponsors')?></label>
+                <select id="<?php echo $this->get_field_id('image_type'); ?>" name="<?php echo $this->get_field_name('image_type'); ?>" class="widefat" style="width:100%;">
+                    <option <?php selected( $instance['image_type'], 'color' ); ?> value="color"><?php echo _e('Full Color (Sponsor Logo #1)', 'wp-sponsors'); ?></option>
+                    <option <?php selected( $instance['image_type'], 'white' ); ?> value="white"><?php echo _e('White (Sponsor Logo #2)', 'wp-sponsors'); ?></option>
+                </select>
+
+            </p>
             <p>
                 <label for="<?php echo $this->get_field_id('display_option'); ?>"> <?php echo __('Display', 'wp-sponsors')?></label>
                 <select id="<?php echo $this->get_field_id('display_option'); ?>" name="<?php echo $this->get_field_name('display_option'); ?>" class="widefat" style="width:100%;">

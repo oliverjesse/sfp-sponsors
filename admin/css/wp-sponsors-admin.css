@@ -3,6 +3,19 @@
  * included in this file.
  */
 
-td.column-wp_sponsors_img {
+td.column-wp_sponsors_logo {
     width: 100%;
+}
+
+td.column-wp_sponsors_logo img {
+  max-width: 100%;
+  height: intrinsic;
+}
+
+/* Checkerboard pattern for behind white logos */
+#sponsor-logo-2-sponsor img {
+  background-image: -webkit-linear-gradient(45deg, #c4c4c4 25%, transparent 25%, transparent 75%, #c4c4c4 75%, #c4c4c4), -webkit-linear-gradient(45deg, #c4c4c4 25%, transparent 25%, transparent 75%, #c4c4c4 75%, #c4c4c4);
+  background-image: linear-gradient(45deg, #c4c4c4 25%, transparent 25%, transparent 75%, #c4c4c4 75%, #c4c4c4), linear-gradient(45deg, #c4c4c4 25%, transparent 25%, transparent 75%, #c4c4c4 75%, #c4c4c4);
+  background-position: 0 0, 10px 10px;
+  background-size: 20px 20px;
 }

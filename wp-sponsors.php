@@ -8,17 +8,17 @@
  * registers the activation and deactivation functions, and defines a function
  * that starts the plugin.
  *
- * @link              http://studioespresso.co
+ * @link              http://sfpride.org
  * @since             1.0.0
- * @package           Wp_Sponsors
+ * @package           Sfp_Sponsors
  *
  * @wordpress-plugin
- * Plugin Name:       Sponsors
- * Plugin URI:        http://studioespresso.co
- * Description:       Add links and logo's for your sponsors/partners/etc to your sidebars and posts with our widget and shortcode.
+ * Plugin Name:       SF Pride Sponsors
+ * Plugin URI:        http://sfpride.org
+ * Description:       Lightly modified from Studio Espresso's Sponsors plugin
  * Version:           2.3.0
- * Author:            Studio Espresso
- * Author URI:        http://studioespresso.co
+ * Author:            Jesse Oliver (but mostly Studio Espresso)
+ * Author URI:        http://oliverjesse.info
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       wp-sponsors

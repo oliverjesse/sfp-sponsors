@@ -11,7 +11,8 @@
             'type' => 'post',
             'image' => 'yes',
             'images' => 'yes',
-            'category' => '',
+            'image_type' => 'white',
+            'level' => '',
             'size' => 'default',
             'style' => 'list',
             'description' => 'no',
@@ -33,12 +34,12 @@
 
         $nofollow = ( defined( 'SPONSORS_NO_FOLLOW' ) ) ? SPONSORS_NO_FOLLOW : true;
 
-        if(!empty($category)) {
+        if(!empty($level)) {
           $args['tax_query'] = array(
             array(
-              'taxonomy'  => 'sponsor_categories',
+              'taxonomy'  => 'sponsor_levels',
               'field'     => 'slug',
-              'terms'     => $category,
+              'terms'     => $level,
             ),
           );
         }
@@ -114,7 +115,7 @@
                 }
                 // Check if we should do images, just show the title if there's no image set
                  if($images){
-                    $sponsor .=  $shame->getImage(get_the_ID());
+                    $sponsor .=  $shame->getImage(get_the_ID(), $image_type);
                  } elseif ($title === false) {
                      $sponsor .= '<h3>' . get_the_title() . '</h3>';
                 }
