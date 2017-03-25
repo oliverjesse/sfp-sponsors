@@ -68,7 +68,7 @@
 
         switch ($layout) {
             case "list":
-                $style['containerPre'] = '<div id="wp-sponsors"><ul>';
+                $style['containerPre'] = '<div id="wp-sponsors"><ul class="sponsor-list">';
                 $style['containerPost'] = '</ul></div>';
                 $style['wrapperClass'] = 'sponsor-item';
                 $style['wrapperPre'] = 'li';
