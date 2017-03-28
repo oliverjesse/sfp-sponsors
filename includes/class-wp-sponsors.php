@@ -280,6 +280,10 @@ class Wp_Sponsors {
                 }
                 add_action( 'add_meta_boxes', 'add_sponsor_link_behaviour_metabox' );
 
+                function add_css_metabox() {
+                        add_meta_box( 'meta-box-css', __( 'Extra CSS', 'wp_sponsors' ), 'sponsor_metabox_css', 'sponsor', 'normal' );
+                }
+                add_action( 'add_meta_boxes', 'add_css_metabox' );
                 /**
                  * Meta box display callback.
                  *
@@ -313,6 +317,11 @@ class Wp_Sponsors {
                     echo '<label><input type="checkbox" id="wp_sponsor_link_behaviour" name="wp_sponsor_link_behaviour" value="1" ' . checked($meta_value, '1', false) . '>' . __('Open link in a new window', 'wp-sponsors') . '</label>';
                 }
 
+                function sponsor_metabox_css($post) {
+                    $meta_value = get_post_meta( get_the_ID(), 'wp_sponsor_css', true );
+                    echo '<label><input type="text" id="wp_sponsor_css" name="wp_sponsor_css" value="' . $meta_value . '"></label>';
+                }
+
 
                 /**
                  * Save meta box content.
@@ -338,6 +347,9 @@ class Wp_Sponsors {
                         if( isset( $_POST[ 'wp_sponsors_desc' ] ) ) {
                                 update_post_meta( $post_id, 'wp_sponsors_desc', $_POST[ 'wp_sponsors_desc' ] );
                         }
+                        if( isset( $_POST[ 'wp_sponsor_css' ] ) ) {
+                                update_post_meta( $post_id, 'wp_sponsor_css', $_POST[ 'wp_sponsor_css' ] );
+                        }
                         $link_behaviour = $_POST['wp_sponsor_link_behaviour'] ? '1' : '0';
                         update_post_meta( $post_id, 'wp_sponsor_link_behaviour', $link_behaviour );
                 }
@@ -359,7 +371,7 @@ class Wp_Sponsors {
                 function sponsors_column_add_image($column_name, $post_ID) {
                         $shame = new Wp_Sponsors_Shame();
                         if ($column_name == 'wp_sponsors_logo') {
-                                $image = $shame->getImage($post_ID, 'color');
+                                $image = "<img src='" . $shame->getImage($post_ID, 'color') . "'>";
                                 echo $image;
                         }
                 }

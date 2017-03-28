@@ -15,6 +15,7 @@
             'level' => '',
             'size' => 'default',
             'style' => 'list',
+            'css' => '',
             'description' => 'no',
             'orderby' => 'menu_order',
             'title' => 'no',
@@ -57,6 +58,7 @@
         isset($debug) ? $debug = true : $debug = false;
         $description === 'yes' ? $description = true : $description = false;
         $title === 'yes' ? $title = true : $title = false;
+        $extra_css = $atts['css'];
 
         $query = new WP_Query($args);
 
@@ -117,7 +119,7 @@
                 if($images){
                     if ( has_post_thumbnail() ) {
                    	  	$logo_src = $shame->getImage(get_the_ID(), $image_type);
-                        $sponsor .= '<div style="background-image:url('.$logo_src.');"></div>';
+                        $sponsor .= '<div style="background-image:url('.$logo_src.'); ' . $extra_css . '"></div>';
                     }
                 } elseif ($title === false) {
                      $sponsor .= '<h3>' . get_the_title() . '</h3>';
