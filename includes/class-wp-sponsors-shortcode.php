@@ -11,14 +11,14 @@
             'type' => 'post',
             'image' => 'yes',
             'images' => 'yes',
-            'image_type' => 'white',
+            'image_type' => 'color',
             'level' => '',
             'size' => 'default',
             'style' => 'list',
             'description' => 'no',
             'orderby' => 'menu_order',
             'title' => 'no',
-            'max' => '-1',
+            'max' => '30',
             'debug' => NULL
         ), $atts ) );
 
