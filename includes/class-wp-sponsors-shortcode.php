@@ -18,6 +18,7 @@
             'css' => '',
             'description' => 'no',
             'orderby' => 'menu_order',
+            'heading' => 'on',
             'title' => 'no',
             'max' => 30,
             'debug' => NULL
@@ -88,6 +89,10 @@
         }
 
         if ( $query->have_posts() ) {
+            if ( $heading === 'on') {
+                echo '<h4>' . $level . '</h4>';
+            }
+
             while ( $query->have_posts() ) : $query->the_post();
 
                 if($query->current_post === 0) { echo $style['containerPre']; }
