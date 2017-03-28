@@ -15,7 +15,6 @@
             'level' => '',
             'size' => 'default',
             'style' => 'list',
-            'css' => '',
             'description' => 'no',
             'orderby' => 'menu_order',
             'heading' => 'on',
@@ -59,7 +58,6 @@
         isset($debug) ? $debug = true : $debug = false;
         $description === 'yes' ? $description = true : $description = false;
         $title === 'yes' ? $title = true : $title = false;
-        $extra_css = $atts['css'];
 
         $query = new WP_Query($args);
 
@@ -101,6 +99,8 @@
                 $class = '';
                 $class .= $size;
                 if($debug) { $class .= ' debug'; }
+
+                $extra_css = get_post_meta( get_the_ID(), 'wp_sponsor_css', true );
 
                 echo '<' . $style['wrapperPre'] . ' class="' . $style['wrapperClass'] .' ' . $class . '">';
                 $sponsor = '';
