@@ -18,7 +18,7 @@
             'description' => 'no',
             'orderby' => 'menu_order',
             'title' => 'no',
-            'max' => '30',
+            'max' => 30,
             'debug' => NULL
         ), $atts ) );
 
@@ -28,7 +28,7 @@
             'pagination'            => false,
             'order'                 => 'ASC',
             'orderby'               => $atts['orderby'],
-            'posts_per_page'        => (int)$atts['max'],
+            'posts_per_page'        => 30,
             'tax_query'             => array(),
         );
 
