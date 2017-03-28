@@ -114,9 +114,12 @@
                     $sponsor .= '<a href=' .$link . ' target="_blank">';
                 }
                 // Check if we should do images, just show the title if there's no image set
-                 if($images){
-                    $sponsor .=  $shame->getImage(get_the_ID(), $image_type);
-                 } elseif ($title === false) {
+                if($images){
+                    if ( has_post_thumbnail() ) {
+                   	  	$logo_src = $shame->getImage(get_the_ID(), $image_type);
+                        $sponsor .= '<div style="background-image:url('.$logo_src.');"></div>';
+                    }
+                } elseif ($title === false) {
                      $sponsor .= '<h3>' . get_the_title() . '</h3>';
                 }
 
