@@ -53,7 +53,7 @@
             ?>
                 <?php echo $before_widget; ?>
                 <?php if ( $title ) echo $before_title . $title . $after_title; ?>
-                <ul class="<?php echo $instance['display_option']; ?>">
+                <ul class="sponsor-list <?php echo $instance['display_option']; ?>">
                 <?php while ( $query->have_posts() ) : $query->the_post(); ?>
                     <?php
                         $link = get_post_meta( get_the_ID(), 'wp_sponsors_url', true );
@@ -68,7 +68,8 @@
                             <div class="sponsor-title widget-title"><?php echo the_title(); ?></div>
                         <?php }; ?>
                         <?php if($instance['check_images'] === "on"){ ?>
-                            <?php echo $shame->getImage(get_the_ID(), $instance['image_type']) ?>
+                            <div style='background-image: url(<?php echo $shame->getImage(get_the_ID(), $instance['image_type']) ?>); <?php echo get_post_meta( get_the_ID(), 'wp_sponsor_css', true ) ?>'>
+                            </div>
                         <?php } else { the_title(); } ?>
                         <?php if($instance['show_description'] === "on"){ ?>
                             <br><p class="sponsor-desc"><?php echo get_post_meta( get_the_ID(), 'wp_sponsors_desc', true ); ?></p>
