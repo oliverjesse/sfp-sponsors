@@ -19,7 +19,7 @@
             'orderby' => 'menu_order',
             'heading' => 'on',
             'title' => 'no',
-            'max' => 30,
+            'max' => 50,
             'debug' => NULL
         ), $atts ) );
 
@@ -29,7 +29,7 @@
             'pagination'            => false,
             'order'                 => 'ASC',
             'orderby'               => $atts['orderby'],
-            'posts_per_page'        => 30,
+            'posts_per_page'        => 50,
             'tax_query'             => array(),
         );
 
